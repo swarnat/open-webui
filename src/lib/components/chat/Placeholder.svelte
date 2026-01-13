@@ -62,6 +62,9 @@
 
 	let models = [];
 	let selectedModelIdx = 0;
+	
+	// Define welcomeMessage as a reactive variable
+	$: welcomeMessage = $config?.welcome_message || '';
 
 	$: if (selectedModels.length > 0) {
 		selectedModelIdx = models.length - 1;
@@ -226,6 +229,15 @@
 		</div>
 	</div>
 
+	{#if welcomeMessage}
+	<div
+		class="mx-auto px-4 md:max-w-3xl md:px-6 font-primary"
+		in:fade={{ duration: 200, delay: 200 }}
+	>
+		{welcomeMessage}
+	</div>
+	{/if}
+
 	{#if $selectedFolder}
 		<div
 			class="mx-auto px-4 md:max-w-3xl md:px-6 font-primary min-h-62"
@@ -247,4 +259,5 @@
 			</div>
 		</div>
 	{/if}
+
 </div>

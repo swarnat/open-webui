@@ -445,6 +445,7 @@ from open_webui.config import (
     QUERY_GENERATION_PROMPT_TEMPLATE,
     AUTOCOMPLETE_GENERATION_PROMPT_TEMPLATE,
     AUTOCOMPLETE_GENERATION_INPUT_MAX_LENGTH,
+    WELCOME_MESSAGE,
     AppConfig,
     reset_config,
 )
@@ -1013,6 +1014,7 @@ app.state.config.FIRECRAWL_API_BASE_URL = FIRECRAWL_API_BASE_URL
 app.state.config.FIRECRAWL_API_KEY = FIRECRAWL_API_KEY
 app.state.config.FIRECRAWL_TIMEOUT = FIRECRAWL_TIMEOUT
 app.state.config.TAVILY_EXTRACT_DEPTH = TAVILY_EXTRACT_DEPTH
+app.state.config.WELCOME_MESSAGE = WELCOME_MESSAGE
 
 app.state.EMBEDDING_FUNCTION = None
 app.state.RERANKING_FUNCTION = None
@@ -1968,6 +1970,7 @@ async def get_app_config(request: Request):
             {
                 "default_models": app.state.config.DEFAULT_MODELS,
                 "default_pinned_models": app.state.config.DEFAULT_PINNED_MODELS,
+                "welcome_message": app.state.config.WELCOME_MESSAGE,
                 "default_prompt_suggestions": app.state.config.DEFAULT_PROMPT_SUGGESTIONS,
                 "user_count": user_count,
                 "code": {
