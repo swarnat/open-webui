@@ -277,9 +277,17 @@ async def update_default_user_permissions(
 
 @router.get("/user/settings", response_model=Optional[UserSettings])
 async def get_user_settings_by_session_user(
-    user=Depends(get_verified_user), db: Session = Depends(get_session)
+    request: Request, user=Depends(get_verified_user), db: Session = Depends(get_session)
 ):
     user = Users.get_user_by_id(user.id, db=db)
+
+    always = request.app.state.config.ALWAYS_PINNED_MODELS or []
+    user_pinned = user.settings.ui.get("pinnedModels", [])
+
+    user.settings.ui["pinnedModels"] = list(dict.fromkeys(
+        always + user_pinned
+    ))
+    
     if user:
         return user.settings
     else:
