@@ -384,6 +384,9 @@ from open_webui.config import (
     DEFAULT_MODELS,
     DEFAULT_PINNED_MODELS,
     ALWAYS_PINNED_MODELS,
+    INTERNAL_MODELS,
+    INTERNAL_MODELS_MESSAGE,
+    EXTERNAL_MODELS_MESSAGE,
     DEFAULT_ARENA_MODEL,
     MODEL_ORDER_LIST,
     EVALUATION_ARENA_MODELS,
@@ -781,6 +784,9 @@ app.state.config.DEFAULT_MODELS = DEFAULT_MODELS
 app.state.config.DEFAULT_PINNED_MODELS = DEFAULT_PINNED_MODELS
 app.state.config.ALWAYS_PINNED_MODELS = ALWAYS_PINNED_MODELS
 app.state.config.MODEL_ORDER_LIST = MODEL_ORDER_LIST
+app.state.config.INTERNAL_MODELS = INTERNAL_MODELS
+app.state.config.INTERNAL_MODELS_MESSAGE = INTERNAL_MODELS_MESSAGE
+app.state.config.EXTERNAL_MODELS_MESSAGE = EXTERNAL_MODELS_MESSAGE
 
 
 app.state.config.DEFAULT_PROMPT_SUGGESTIONS = DEFAULT_PROMPT_SUGGESTIONS
@@ -1973,6 +1979,9 @@ async def get_app_config(request: Request):
                 "default_models": app.state.config.DEFAULT_MODELS,
                 "default_pinned_models": app.state.config.DEFAULT_PINNED_MODELS,
                 "always_pinned_models": app.state.config.ALWAYS_PINNED_MODELS,
+                "internal_models": app.state.config.INTERNAL_MODELS,
+                "message_internal_model": app.state.config.INTERNAL_MODELS_MESSAGE,
+                "message_external_model": app.state.config.EXTERNAL_MODELS_MESSAGE,
                 "welcome_message": app.state.config.WELCOME_MESSAGE,
                 "default_prompt_suggestions": app.state.config.DEFAULT_PROMPT_SUGGESTIONS,
                 "user_count": user_count,

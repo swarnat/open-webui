@@ -108,6 +108,23 @@
 	let selectedModelIds = [];
 	$: selectedModelIds = atSelectedModel !== undefined ? [atSelectedModel.id] : selectedModels;
 
+	// Determine which message to show based on selected model
+	let showModelMessage = false;
+	let isInternalModel = false;
+	let internalModelMessage = $config?.message_internal_model;
+	let externalModelMessage = $config?.message_external_model;
+	
+	$: {
+		const currentModelId = selectedModelIds[0];
+		if (currentModelId) {
+			const internalModels = $config?.internal_models || [];
+			isInternalModel = internalModels.includes(currentModelId);
+			showModelMessage = true;
+		} else {
+			showModelMessage = false;
+		}
+	}
+
 	export let history;
 	export let taskIds = null;
 
@@ -1014,6 +1031,29 @@
 
 {#if loaded}
 	<div class="w-full font-primary">
+		{#if showModelMessage}
+			<div class="mx-auto inset-x-0 bg-transparent flex justify-center">
+				<div
+					class="flex flex-col px-3 {($settings?.widescreenMode ?? null)
+						? 'max-w-full'
+						: 'max-w-6xl'} w-full"
+				>
+					{#if isInternalModel}
+						{#if internalModelMessage}
+						<div style="color:darkgreen;" class="mb-2 text-sm text-center">
+							{internalModelMessage}
+						</div>
+						{/if}
+					{:else}
+						{#if externalModelMessage}
+						<div style="color:#364bde;" class="mb-2 text-sm text-center">
+							{externalModelMessage}
+						</div>
+						{/if}
+					{/if}
+				</div>
+			</div>
+		{/if}
 		<div class=" mx-auto inset-x-0 bg-transparent flex justify-center">
 			<div
 				class="flex flex-col px-3 {($settings?.widescreenMode ?? null)

@@ -1182,6 +1182,22 @@ ALWAYS_PINNED_MODELS = PersistentConfig(
     os.environ.get("ALWAYS_PINNED_MODELS", "").split(",")
 )
 
+INTERNAL_MODELS = PersistentConfig(
+    "INTERNAL_MODELS",
+    "ui.always_pinned_models",
+    os.environ.get("INTERNAL_MODELS", "").split(",")
+)
+INTERNAL_MODELS_MESSAGE = PersistentConfig(
+    "INTERNAL_MODELS_MESSAGE",
+    "ui.always_pinned_models",
+    os.environ.get("INTERNAL_MODELS_MESSAGE", None)
+)
+EXTERNAL_MODELS_MESSAGE = PersistentConfig(
+    "EXTERNAL_MODELS_MESSAGE",
+    "ui.always_pinned_models",
+    os.environ.get("EXTERNAL_MODELS_MESSAGE", None)
+)
+
 try:
     default_prompt_suggestions = json.loads(
         os.environ.get("DEFAULT_PROMPT_SUGGESTIONS", "[]")
