@@ -576,6 +576,20 @@ ENABLE_OAUTH_GROUP_CREATION = PersistentConfig(
 )
 
 
+oauth_group_default_share = (
+    os.environ.get("OAUTH_GROUP_DEFAULT_SHARE", "true").strip().lower()
+)
+OAUTH_GROUP_DEFAULT_SHARE = PersistentConfig(
+    "OAUTH_GROUP_DEFAULT_SHARE",
+    "oauth.group_default_share",
+    (
+        "members"
+        if oauth_group_default_share == "members"
+        else oauth_group_default_share == "true"
+    ),
+)
+
+
 OAUTH_BLOCKED_GROUPS = PersistentConfig(
     "OAUTH_BLOCKED_GROUPS",
     "oauth.blocked_groups",
@@ -1288,6 +1302,18 @@ WELCOME_MESSAGE = PersistentConfig(
     os.environ.get("WELCOME_MESSAGE", ""),
 )
 
+DEFAULT_MODEL_METADATA = PersistentConfig(
+    "DEFAULT_MODEL_METADATA",
+    "models.default_metadata",
+    {},
+)
+
+DEFAULT_MODEL_PARAMS = PersistentConfig(
+    "DEFAULT_MODEL_PARAMS",
+    "models.default_params",
+    {},
+)
+
 DEFAULT_USER_ROLE = PersistentConfig(
     "DEFAULT_USER_ROLE",
     "ui.default_user_role",
@@ -1481,6 +1507,10 @@ USER_PERMISSIONS_CHAT_FILE_UPLOAD = (
                    "True").lower() == "true"
 )
 
+USER_PERMISSIONS_CHAT_WEB_UPLOAD = (
+    os.environ.get("USER_PERMISSIONS_CHAT_WEB_UPLOAD", "True").lower() == "true"
+)
+
 USER_PERMISSIONS_CHAT_DELETE = (
     os.environ.get("USER_PERMISSIONS_CHAT_DELETE", "True").lower() == "true"
 )
@@ -1632,6 +1662,7 @@ DEFAULT_USER_PERMISSIONS = {
         "system_prompt": USER_PERMISSIONS_CHAT_SYSTEM_PROMPT,
         "params": USER_PERMISSIONS_CHAT_PARAMS,
         "file_upload": USER_PERMISSIONS_CHAT_FILE_UPLOAD,
+        "web_upload": USER_PERMISSIONS_CHAT_WEB_UPLOAD,
         "delete": USER_PERMISSIONS_CHAT_DELETE,
         "delete_message": USER_PERMISSIONS_CHAT_DELETE_MESSAGE,
         "continue_response": USER_PERMISSIONS_CHAT_CONTINUE_RESPONSE,
@@ -1744,6 +1775,10 @@ BYPASS_ADMIN_ACCESS_CONTROL = (
 
 ENABLE_ADMIN_CHAT_ACCESS = (
     os.environ.get("ENABLE_ADMIN_CHAT_ACCESS", "True").lower() == "true"
+)
+
+ENABLE_ADMIN_ANALYTICS = (
+    os.environ.get("ENABLE_ADMIN_ANALYTICS", "True").lower() == "true"
 )
 
 ENABLE_COMMUNITY_SHARING = PersistentConfig(
@@ -2995,6 +3030,12 @@ ENABLE_ASYNC_EMBEDDING = PersistentConfig(
     os.environ.get("ENABLE_ASYNC_EMBEDDING", "True").lower() == "true",
 )
 
+RAG_EMBEDDING_CONCURRENT_REQUESTS = PersistentConfig(
+    "RAG_EMBEDDING_CONCURRENT_REQUESTS",
+    "rag.embedding_concurrent_requests",
+    int(os.getenv("RAG_EMBEDDING_CONCURRENT_REQUESTS", "0")),
+)
+
 RAG_EMBEDDING_QUERY_PREFIX = os.environ.get("RAG_EMBEDDING_QUERY_PREFIX", None)
 
 RAG_EMBEDDING_CONTENT_PREFIX = os.environ.get(
@@ -3582,6 +3623,12 @@ YANDEX_WEB_SEARCH_CONFIG = PersistentConfig(
     "YANDEX_WEB_SEARCH_CONFIG",
     "rag.web.search.yandex_web_search_config",
     os.environ.get("YANDEX_WEB_SEARCH_CONFIG", ""),
+)
+
+YOUCOM_API_KEY = PersistentConfig(
+    "YOUCOM_API_KEY",
+    "rag.web.search.youcom_api_key",
+    os.environ.get("YOUCOM_API_KEY", ""),
 )
 
 ####################################
