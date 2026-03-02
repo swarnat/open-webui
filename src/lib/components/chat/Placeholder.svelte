@@ -60,6 +60,8 @@
 
 	export let toolServers = [];
 
+	export let dragged = false;
+
 	let models = [];
 	let selectedModelIdx = 0;
 	
@@ -215,6 +217,7 @@
 					bind:webSearchEnabled
 					bind:atSelectedModel
 					bind:showCommands
+					bind:dragged
 					{toolServers}
 					{stopResponse}
 					{createMessagePair}
