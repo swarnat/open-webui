@@ -130,6 +130,7 @@ RUN apt-get update && \
     libmariadb-dev \
     python3-dev \
     ffmpeg libsm6 libxext6 zstd \
+    poppler-utils \
     && rm -rf /var/lib/apt/lists/*
 
 # install python dependencies
