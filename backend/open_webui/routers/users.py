@@ -281,7 +281,7 @@ async def get_user_settings_by_session_user(
         user=Depends(get_verified_user), 
         db: AsyncSession = Depends(get_async_session) 
         ):
-    user = Users.get_user_by_id(user.id, db=db)
+    user = await Users.get_user_by_id(user.id, db=db)
 
     always = request.app.state.config.ALWAYS_PINNED_MODELS or []
     user_pinned = user.settings.ui.get("pinnedModels", [])
