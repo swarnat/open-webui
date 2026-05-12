@@ -279,7 +279,7 @@ async def update_default_user_permissions(request: Request, form_data: UserPermi
 async def get_user_settings_by_session_user(
         request: Request, 
         user=Depends(get_verified_user), 
-        db: AsyncSession = Depends(get_async_session)
+        db: AsyncSession = Depends(get_async_session) 
         ):
     user = Users.get_user_by_id(user.id, db=db)
 
