@@ -1605,6 +1605,15 @@ DEFAULT_MODELS = os.getenv('DEFAULT_MODELS', None)
 
 DEFAULT_PINNED_MODELS = os.getenv('DEFAULT_PINNED_MODELS', None)
 
+# Custom - Start
+ALWAYS_PINNED_MODELS = os.getenv('ALWAYS_PINNED_MODELS', '')
+INTERNAL_MODELS = os.getenv('INTERNAL_MODELS', '')
+INTERNAL_MODELS_MESSAGE = os.getenv('INTERNAL_MODELS_MESSAGE', None)
+EXTERNAL_MODELS_MESSAGE = os.getenv('EXTERNAL_MODELS_MESSAGE', None)
+
+WELCOME_MESSAGE = os.getenv('WELCOME_MESSAGE', '')
+# Custom - Ende
+
 try:
     default_prompt_suggestions = json.loads(os.getenv('DEFAULT_PROMPT_SUGGESTIONS', '[]'))
 except Exception as e:
@@ -2978,6 +2987,13 @@ DEFAULT_CONFIG = {
     'ui.default_locale': DEFAULT_LOCALE,
     'ui.default_models': DEFAULT_MODELS,
     'ui.default_pinned_models': DEFAULT_PINNED_MODELS,
+    # Custom - Start
+    'ui.always_pinned_models': ALWAYS_PINNED_MODELS,
+    'ui.internal_models': INTERNAL_MODELS,
+    'ui.internal_models_message': INTERNAL_MODELS_MESSAGE,
+    'ui.external_models_message': EXTERNAL_MODELS_MESSAGE,
+    'ui.welcome_message': WELCOME_MESSAGE,
+    # Custom - Ende    
     'ui.prompt_suggestions': DEFAULT_PROMPT_SUGGESTIONS,
     'ui.model_order_list': MODEL_ORDER_LIST,
     'models.default_metadata': DEFAULT_MODEL_METADATA,
@@ -3111,15 +3127,3 @@ Config.configure(
     enable_persistent=ENABLE_PERSISTENT_CONFIG,
     enable_oauth_persistent=ENABLE_OAUTH_PERSISTENT_CONFIG,
 )
-
-## MUGLER Adjustments START
-
-ALWAYS_PINNED_MODELS = os.getenv("ALWAYS_PINNED_MODELS", "").split(",")
-
-INTERNAL_MODELS = os.getenv("INTERNAL_MODELS", "").split(",")
-
-INTERNAL_MODELS_MESSAGE = os.getenv("INTERNAL_MODELS_MESSAGE", None)
-
-EXTERNAL_MODELS_MESSAGE = os.getenv("EXTERNAL_MODELS_MESSAGE", None)
-
-## MUGLER Adjustments ENDE
