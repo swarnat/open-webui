@@ -313,12 +313,15 @@ async def get_user_settings_by_session_user(
         ):
     user = await Users.get_user_by_id(user.id, db=db)
 
-    always = request.app.state.config.ALWAYS_PINNED_MODELS or []
+    # custom code start
+    always_pinned_models = await Config.get('ui.always_pinned_models', '') or ''
+    always = [model.strip() for model in always_pinned_models.split(',') if model.strip()]
     user_pinned = user.settings.ui.get("pinnedModels", [])
 
     user.settings.ui["pinnedModels"] = list(dict.fromkeys(
         always + user_pinned
     ))
+    # custom code end
     
     if user:
         return user.settings
