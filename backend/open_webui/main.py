@@ -1173,6 +1173,12 @@ async def chat_completion(
             model_info.params.model_dump() if model_info and model_info.params else {},
         )
         request_params = {key: value for key, value in (form_data.get('params') or {}).items() if value is not None}
+        # FORK(reasoning-effort): BEGIN - ignore user-selected reasoning effort if disabled on the model
+        if model_capabilities.get('reasoning_effort') is False:
+            request_params.pop('reasoning_effort', None)
+        elif request_params.get('reasoning_effort') == 'none' and not model_capabilities.get('reasoning_effort_none'):
+            request_params.pop('reasoning_effort', None)
+        # FORK(reasoning-effort): END
         if model_info_params or request_params:
             form_data['params'] = merge_model_params(model_info_params, request_params)
 

@@ -1392,6 +1392,16 @@ def convert_to_responses_payload(payload: dict) -> dict:
     if 'max_completion_tokens' in responses_payload:
         responses_payload['max_output_tokens'] = responses_payload.pop('max_completion_tokens')
 
+    # FORK(reasoning-effort): BEGIN - Responses API expects reasoning: {"effort": ...}
+    reasoning_effort = responses_payload.pop('reasoning_effort', None)
+    if reasoning_effort:
+        reasoning = responses_payload.get('reasoning')
+        responses_payload['reasoning'] = {
+            **(reasoning if isinstance(reasoning, dict) else {}),
+            'effort': reasoning_effort,
+        }
+    # FORK(reasoning-effort): END
+
     # Remove Chat Completions-only parameters not supported by the Responses API
     for unsupported_key in (
         'stream_options',

@@ -124,7 +124,9 @@ export const DEFAULT_CAPABILITIES = {
 	status_updates: true,
 	usage: undefined,
 	memory: true,
-	builtin_tools: true
+	builtin_tools: true,
+	reasoning_effort: true, // FORK(reasoning-effort)
+	reasoning_effort_none: false // FORK(reasoning-effort)
 };
 
 export const PASTED_TEXT_CHARACTER_LIMIT = 1000;

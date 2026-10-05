@@ -4436,7 +4436,9 @@
 									id={embedded ? messageInputDropzoneId : undefined}
 									class=" pb-2 {dragged ? 'z-0' : 'z-10'}"
 								>
+									<!-- FORK(reasoning-effort): bind:params added -->
 									<MessageInput
+										bind:params
 										bind:this={messageInput}
 										{history}
 										{taskIds}
@@ -4528,7 +4530,9 @@
 									</div>
 								{/if}
 								<div id={embedded ? messageInputDropzoneId : undefined} class="pb-2 z-10">
+									<!-- FORK(reasoning-effort): bind:params added -->
 									<MessageInput
+										bind:params
 										bind:this={messageInput}
 										{history}
 										{taskIds}
@@ -4589,7 +4593,9 @@
 							</div>
 						{:else}
 							<div class="flex items-center h-full">
+								<!-- FORK(reasoning-effort): bind:params added -->
 								<Placeholder
+									bind:params
 									bind:selectedModelIdx
 									{history}
 									bind:selectedModels

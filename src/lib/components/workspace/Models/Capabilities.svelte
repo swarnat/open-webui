@@ -57,6 +57,15 @@
 		builtin_tools: {
 			label: $i18n.t('settings.admin.models.capabilities.builtinTools.label'),
 			description: $i18n.t('settings.admin.models.capabilities.builtinTools.description')
+		},
+		// FORK(reasoning-effort): toggles the reasoning selector in the chat input
+		reasoning_effort: {
+			label: $i18n.t('fork.reasoningEffort.capability.label'),
+			description: $i18n.t('fork.reasoningEffort.capability.description')
+		},
+		reasoning_effort_none: {
+			label: $i18n.t('fork.reasoningEffort.capabilityNone.label'),
+			description: $i18n.t('fork.reasoningEffort.capabilityNone.description')
 		}
 	};
 
@@ -72,6 +81,10 @@
 	// Hide file_context when file_upload is disabled
 	$: visibleCapabilities = (Object.keys(capabilityLabels) as Capability[]).filter((cap) => {
 		if (cap === 'file_context' && !capabilities.file_upload) {
+			return false;
+		}
+		// FORK(reasoning-effort): instant level only makes sense with the reasoning selector
+		if (cap === 'reasoning_effort_none' && capabilities.reasoning_effort === false) {
 			return false;
 		}
 		return true;

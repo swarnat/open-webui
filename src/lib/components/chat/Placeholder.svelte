@@ -60,6 +60,7 @@
 	export let imageGenerationEnabled = false;
 	export let codeInterpreterEnabled = false;
 	export let webSearchEnabled = false;
+	export let params = {}; // FORK(reasoning-effort)
 	export let toolApprovalMode = 'full';
 	export let onToolApprovalModeChange: Function = () => {};
 	export let oauthRedirectHandler: Function = () => {};
@@ -246,8 +247,10 @@
 
 			<div class="text-base font-normal @md:max-w-3xl w-full py-3 {atSelectedModel ? 'mt-2' : ''}">
 				{#if !($selectedFolder && folderReadOnly)}
+					<!-- FORK(reasoning-effort): bind:params added -->
 					<MessageInput
 						bind:this={messageInput}
+						bind:params
 						{history}
 						bind:selectedModels
 						bind:files

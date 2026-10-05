@@ -103,6 +103,7 @@
 	import Terminal from '../icons/Terminal.svelte';
 	import IntegrationsMenu from './MessageInput/IntegrationsMenu.svelte';
 	import TerminalMenu from './MessageInput/TerminalMenu.svelte';
+	import ReasoningEffortMenu from './MessageInput/ReasoningEffortMenu.svelte'; // FORK(reasoning-effort)
 	import Component from '../icons/Component.svelte';
 	import PlusAlt from '../icons/PlusAlt.svelte';
 	import Dropdown from '../common/Dropdown.svelte';
@@ -216,6 +217,7 @@
 	export let imageGenerationEnabled = false;
 	export let webSearchEnabled = false;
 	export let codeInterpreterEnabled = false;
+	export let params = {}; // FORK(reasoning-effort): chat params, bound from Chat.svelte
 	export let toolApprovalMode = 'full';
 	export let onToolApprovalModeChange: Function = () => {};
 
@@ -2614,6 +2616,15 @@
 								</div>
 
 								<div class="self-end flex space-x-1 mr-1 min-w-0 gap-[0.03125rem]">
+									<!-- FORK(reasoning-effort): BEGIN -->
+									<ReasoningEffortMenu
+										bind:params
+										{selectedModelIds}
+										disabled={generating ||
+											(!!history?.currentId &&
+												history.messages[history.currentId]?.done != true)}
+									/>
+									<!-- FORK(reasoning-effort): END -->
 									<div class="flex min-w-0 max-w-[10rem] items-center sm:max-w-[13rem]">
 										<ModelSelector
 											bind:this={modelSelector}
